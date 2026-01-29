@@ -1,0 +1,25 @@
+Dim_date
+
+Create dim_Date
+dim_Date = 
+ADDCOLUMNS (
+    CALENDAR (
+        MIN ( fact_customer_snapshot[SnapshotDate] ),
+        MAX ( fact_customer_snapshot[SnapshotDate] )
+    ),
+
+    "DateAsInteger", FORMAT ( [Date], "YYYYMMDD" ),
+    "Year", YEAR ( [Date] ),
+
+    "QuarterNumber", "Q" & FORMAT ( QUARTER ( [Date] ), "0" ),
+    "YearQuarter", 
+        YEAR ( [Date] ) & " Q" & FORMAT ( QUARTER ( [Date] ), "0" ),
+
+    "MonthNumber", FORMAT ( [Date], "MM" ),
+    "YearMonthNumber", FORMAT ( [Date], "YYYY/MM" ),
+    "YearMonthShort", FORMAT ( [Date], "YYYY/mmm" ),
+    "MonthNameShort", FORMAT ( [Date], "mmm" ),
+    "MonthNameLong", FORMAT ( [Date], "mmmm" ),
+
+    "Week No", FORMAT ( WEEKNUM ( [Date], 2 ), "0" )
+)
