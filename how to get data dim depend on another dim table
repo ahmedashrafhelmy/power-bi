@@ -1,0 +1,15 @@
+correct_city = 
+VAR LastSnap =
+    CALCULATE(
+        MAX(fact_customer_snapshot[SnapshotDate])
+    )
+VAR LastBranch =
+    CALCULATE(
+        SELECTEDVALUE(fact_customer_snapshot[BranchID]),
+        FILTER(
+            RELATEDTABLE(fact_customer_snapshot),
+            fact_customer_snapshot[SnapshotDate] = LastSnap
+        )
+    )
+RETURN
+    LOOKUPVALUE(dim_branch[Region], dim_branch[BranchID], LastBranch)
