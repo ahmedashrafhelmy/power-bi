@@ -1,0 +1,15 @@
+city_blank = 
+IF(
+    ISBLANK(dim_customer[City]) || dim_customer[City] = "",
+    "Missing",
+    "Available"
+)
+
+  don't use this way
+    city_blank_2 = 
+IF(
+    ISBLANK(dim_customer[City]) ,
+    "Missing",
+    "Available"
+) 
+becuase this code get blank but if "" that mean have data and that is not true
